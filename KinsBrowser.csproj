@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>KinsBrowser</AssemblyName>
+    <RootNamespace>KinsBrowser</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Optional: taruh file app.ico di folder ini lalu aktifkan baris di bawah untuk custom icon -->
+    <!-- <ApplicationIcon>app.ico</ApplicationIcon> -->
+
+    <!-- Portable, no-admin friendly publish settings -->
+    <!-- PENTING: win-x86 (32-bit), BUKAN win-x64. Ini WAJIB karena OWC (Office Web
+         Components) yang dipakai aplikasi Excel-in-browser kamu adalah ActiveX 32-bit.
+         Sebuah proses 64-bit TIDAK BISA memuat ActiveX 32-bit sama sekali -- kalau exe
+         ini dibuild sebagai x64, tab "Mode IE" akan tetap gagal menampilkan OWC walau
+         semua pengaturan lain sudah benar. WebView2 sendiri tetap bekerja normal di x86. -->
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Mesin modern (Chromium/Edge) untuk tab biasa -->
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4129.50" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Only referenced if app.ico is present; harmless if missing since Visual Studio will just skip icon -->
+  </ItemGroup>
+
+</Project>
